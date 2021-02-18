@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ColorsController : ControllerBase
     {
+
         IColorService _colorService;
         public ColorsController(IColorService colorService)
         {
@@ -64,14 +66,12 @@ namespace WebAPI.Controllers
         public IActionResult GetCarByColorId(int id)
         {
 
-            var result = _colorService.GetCarsByColorId(id); 
+            var result = _colorService.GetCarsByColorId(id);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        
     }
 }

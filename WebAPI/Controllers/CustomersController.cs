@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController: ControllerBase
+    public class CustomersController : ControllerBase
     {
         ICustomerService _customerService;
         public CustomersController(ICustomerService customerService)
@@ -62,14 +63,13 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetbyId(int id)
         {
-            var result= _customerService.GetbyId(id);
+            var result = _customerService.GetbyId(id);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
 
     }
 }
