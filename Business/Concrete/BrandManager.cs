@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -14,34 +16,39 @@ namespace Business.Concrete
         {
             _brand = brand;
         }
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
             if (brand.BrandName.Length>2)
             {
                 _brand.Add(brand);
+                return new SuccessResult(Messages.Added);
             }
             else
             {
-                Console.WriteLine("Araba ismi 2 halften az olamaz");
+                return new ErrorResult(Messages.Invalid); 
             }
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             _brand.Delete(brand);
+            return new SuccessResult(Messages.Deleted);
         }
-
-        public List<Brand> GetAll()
-        {
-            return _brand.GetAll();
-        }
-        public Brand GetCarsByBrandId(int brandId)
-        {
-            return _brand.Get(b => b.BrandId == brandId);
-        }
-        public void Update(Brand brand)
+        
+        public IResult Update(Brand brand)
         {
             _brand.Update(brand);
+            return new SuccessResult(Messages.Updated);
         }
+
+        public IDataResult<List<Brand>> GetAll()
+        {
+            return new SuccessDataResult<List<Brand>>(_brand.GetAll(),Messages.Listed);
+        }
+        public IDataResult<Brand> GetCarsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<Brand>(_brand.Get(b => b.BrandId == brandId));
+        }
+        
     }
 }

@@ -21,23 +21,26 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.DailyPrice<0)
+            if(car.Description.Length > 2 && car.DailyPrice > 0)
             {
-                return new ErrorResult(Messages.CarPriceInvalid);
+                _CarDal.Add(car);
+                return new SuccessResult(Messages.Added);
             }
-            _CarDal.Add(car);
-            return new SuccessResult(Messages.CarAdded);
+            else
+            {
+                return new ErrorResult(Messages.Invalid);
+            }
         }
         
         public IResult Delete(Car car)
         {
             _CarDal.Delete(car);
-            return new SuccessResult(Messages.CarDeleted);
+            return new SuccessResult(Messages.Deleted);
         }
 
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(),Messages.CarListed);
+            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(),Messages.Listed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
@@ -47,7 +50,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(p => p.BrandId == id),Messages.CarListed);
+            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(p => p.BrandId == id),Messages.Listed);
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int id)
@@ -58,7 +61,7 @@ namespace Business.Concrete
         public IResult Update(Car car)
         {
             _CarDal.Update(car);
-            return new SuccessResult(Messages.CarUpdated);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

@@ -6,12 +6,14 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string CarAdded = "Araba Eklendi";
-        public static string CarNameInvalid = "Araba ismi geçersiz";
+        public static string Added = " Eklendi";
+        public static string NameInvalid = " geçersiz isim";
         public static string MaintenanceTime = "********Sistem bakımda*********";
-        public static string CarPriceInvalid = "Arabanın günlük fiyat bilgisi yetersiz";
-        public static string CarDeleted = "araba silindi";
-        public static string CarUpdated = "araba yenilendi";
-        public static string CarListed = "arabalar listelendi";
+        public static string PriceInvalid = "günlük fiyat bilgisi yetersiz";
+        public static string Deleted = " silindi";
+        public static string Updated = "yenilendi";
+        public static string Listed = " listelendi";
+        public static string Invalid = "geçersiz öğe girdiniz";
+        public static string NullDate = "Tarih boş değil";
     }
 }
