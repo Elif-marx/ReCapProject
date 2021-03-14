@@ -19,7 +19,8 @@ namespace ConsoleUI
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
-            RentalTest();
+            //RentalTest();
+            GetAllCarImage();
 
         }
 
@@ -66,6 +67,14 @@ namespace ConsoleUI
                 Console.WriteLine(result.Message);
             }
 
+        }
+        private static void GetAllCarImage()
+        {
+            CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
+            foreach (var carImage in carImageManager.GetAll().Data)
+            {
+                Console.WriteLine(carImage.Id + "/" + carImage.CarId + "/" + carImage.ImagePath);
+            }
         }
     }
 }
