@@ -10,9 +10,10 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ListCars();
+            //ListCars();
             //RentalTest();
             //GetAllCarImage();
+            CarTest();
         }
 
         private static void RentalTest()
